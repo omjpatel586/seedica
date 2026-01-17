@@ -1,5 +1,11 @@
-import MaintenancePage from "./_components/maintainance-page";
+import BullockCartCanvas from "./_components/bullock-cart-canvas";
+import Header from "./_components/header";
 
 export default function Home() {
-  return <MaintenancePage />;
+  return (
+    <>
+      <Header />
+      <BullockCartCanvas />
+    </>
+  );
 }
