@@ -34,7 +34,7 @@ export default function MaintenancePage() {
 
           <p className="text-stone-600 text-lg md:text-xl mb-8 leading-relaxed">
             We are working hard to bring you the finest range of
-            <span className="font-semibold text-stone-800"> આળસિયા ખાતર </span>
+            <span className="font-semibold text-stone-800"> Fertilizer, Pesticides </span>
             and high-quality seeds. Something organic is growing here!
           </p>
 
