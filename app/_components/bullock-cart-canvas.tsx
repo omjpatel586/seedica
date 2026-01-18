@@ -15,18 +15,28 @@ const BullockCartCanvas = () => {
   // Background Grass Animation
   const groundTextureRef = useRef<THREE.Texture | null>(null);
 
+  const travelDistanceRef = useRef(0);
+
+  const rawModelRef = useRef<THREE.Object3D | null>(null);
+
   const isDragging = useRef<boolean>(false);
   const lastPosition = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+
+  const cameraAngleRef = useRef(0);
+  const cameraHeightRef = useRef(1.8);
 
   useEffect(() => {
     if (!canvasRef.current) return;
 
     // 1. Setup Scene
     const scene = new THREE.Scene();
-    // CHANGE: Tint background to match grass so horizon is invisible
-    scene.background = new THREE.Color(0xcceacc);
-    // CHANGE: Push fog FAR back so we see mostly land (Full Background)
-    scene.fog = new THREE.Fog(0xcceacc, 40, 160);
+    // Soft morning / sunset sky color
+    const skyColor = new THREE.Color(0xf3f6e8);
+    scene.background = skyColor;
+
+    // Atmospheric depth
+    scene.fog = new THREE.Fog(skyColor, 18, 65);
+
     sceneRef.current = scene;
 
     // 2. Setup Camera
@@ -36,9 +46,15 @@ const BullockCartCanvas = () => {
       0.1,
       1000
     );
-    camera.position.set(0, 5, 14); // Slightly higher to see the land better
+    // camera.position.set(0, 5, 14); // Slightly higher to see the land better
     // camera.position.set(0, 2, 10); // Slightly higher to see the land better
-    camera.lookAt(0, -2, 0);
+    // camera.lookAt(0, -2, 0);
+    camera.position.set(
+      camera.position.x,
+      1.6, // was ~1.8–2
+      camera.position.z
+    );
+    camera.lookAt(0, -1.8, -12);
     cameraRef.current = camera;
 
     // 3. Setup Renderer
@@ -48,37 +64,65 @@ const BullockCartCanvas = () => {
       antialias: true,
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, window.innerWidth < 768 ? 1.2 : 2));
     renderer.shadowMap.enabled = true; // <--- Enable Shadows
     rendererRef.current = renderer;
 
+    if (window.innerWidth < 768) {
+      renderer.shadowMap.enabled = false;
+    }
+
+    // const rgbeLoader = new RGBELoader();
+
+    // rgbeLoader.load(
+    //   "/hdri/sunset_farm.hdr", // put file in /public/hdri/
+    //   (texture) => {
+    //     texture.mapping = THREE.EquirectangularReflectionMapping;
+    //     scene.background = texture;
+    //     scene.environment = texture;
+    //   }
+    // );
+
     // 4. Lighting (Bright & Balanced)
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.25);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
-    dirLight.position.set(10, 20, 10);
-    dirLight.castShadow = true; // <--- Sun casts shadow
-    // Optimize shadow map
-    dirLight.shadow.mapSize.width = 1024;
-    dirLight.shadow.mapSize.height = 1024;
-    scene.add(dirLight);
+    const sunLight = new THREE.DirectionalLight(0xffd6a3, 3);
+    sunLight.position.set(-10, 14, 6);
+    sunLight.intensity = 2.5;
+    sunLight.castShadow = true;
+
+    sunLight.shadow.mapSize.set(2048, 2048);
+    sunLight.shadow.camera.near = 1;
+    sunLight.shadow.camera.far = 50;
+
+    scene.add(sunLight);
+
+    const skyPlane = new THREE.Mesh(
+      new THREE.PlaneGeometry(200, 100),
+      new THREE.MeshBasicMaterial({
+        color: 0xf3f6e8,
+      })
+    );
+
+    skyPlane.position.set(0, 20, -80);
+    scene.add(skyPlane);
 
     // ==========================================
     // 5. THE INFINITE GREEN LAND (Full Background)
     // ==========================================
     const textureLoader = new THREE.TextureLoader();
     // Using a grass texture to simulate real land
-    // const grassTextureUrl = "/assets/hero-section.png"; // Ensure this file exists!
+    const grassTextureUrl = "/assets/hero-section (2).png"; // Ensure this file exists!
 
     // Fallback URL if local file is missing (Generic seamless grass)
-    const grassTextureUrl = "https://threejs.org/examples/textures/terrain/grasslight-big.jpg";
+    // const grassTextureUrl = "https://threejs.org/examples/textures/terrain/grasslight-big.jpg";
 
     textureLoader.load(grassTextureUrl, (texture) => {
       texture.wrapS = THREE.MirroredRepeatWrapping;
       texture.wrapT = THREE.MirroredRepeatWrapping;
       // High repeat makes it look like a vast field, not a blurry image
-      texture.repeat.set(8, 8);
+      texture.repeat.set(2.5, 2.5);
 
       // const maxAnisotropy = rendererRef.current?.capabilities.getMaxAnisotropy() || 1;
       // texture.anisotropy = maxAnisotropy;
@@ -89,9 +133,13 @@ const BullockCartCanvas = () => {
       const planeGeometry = new THREE.PlaneGeometry(200, 200);
       const planeMaterial = new THREE.MeshStandardMaterial({
         map: texture,
-        color: 0x99cc99, // Fresh Green Tint
-        roughness: 1, // Matte finish (like real grass)
+        roughness: 0.95,
         metalness: 0,
+      });
+
+      const treeMaterial = new THREE.MeshStandardMaterial({
+        color: 0x2f4f2f,
+        roughness: 1,
       });
 
       const floor = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -99,6 +147,41 @@ const BullockCartCanvas = () => {
       floor.position.y = -3.5; // Sitting low
       floor.receiveShadow = true;
       scene.add(floor);
+
+      const treeCount = window.innerWidth < 768 ? 8 : 20;
+
+      for (let i = 0; i < treeCount; i++) {
+        const tree = new THREE.Mesh(new THREE.ConeGeometry(0.6, 3, 6), treeMaterial);
+
+        tree.position.set((Math.random() - 0.5) * 80, -3.5, -40 - Math.random() * 40);
+
+        tree.castShadow = false;
+        scene.add(tree);
+      }
+
+      // ==========================================
+      // FIX 4: CONTACT SHADOW UNDER BULLOCK CART
+      // ==========================================
+      const shadowGeo = new THREE.PlaneGeometry(6, 3);
+      const shadowMat = new THREE.MeshBasicMaterial({
+        color: 0x000000,
+        transparent: true,
+        opacity: 0.18,
+      });
+
+      const contactShadow = new THREE.Mesh(shadowGeo, shadowMat);
+      contactShadow.rotation.x = -Math.PI / 2;
+
+      // SAME Y as ground + tiny offset to avoid z-fighting
+      contactShadow.position.y = -3.49;
+
+      // SAME Z as your wrapper model
+      contactShadow.position.z = -12;
+
+      // OPTIONAL: slight X offset if needed
+      contactShadow.position.x = 0;
+
+      scene.add(contactShadow);
     });
 
     // 6. Load the Uploaded Model
@@ -107,6 +190,8 @@ const BullockCartCanvas = () => {
       "/assets/bullock_cart_3d_model.glb",
       (gltf) => {
         const rawModel = gltf.scene;
+
+        rawModelRef.current = rawModel;
 
         // --- 1. ANIMATION ---
         if (gltf.animations && gltf.animations.length > 0) {
@@ -142,7 +227,9 @@ const BullockCartCanvas = () => {
         // C. POSITION THE WRAPPER (Right-Bottom)
         // Start conservative: X=2 (Right), Y=-2 (Bottom)
         // wrapper.position.set(2, 0, -8);
-        wrapper.position.set(0, -1, -12);
+        // wrapper.position.set(0, -1, -12);
+        wrapper.position.y = -2.2;
+        // wrapper.position.y -= 0.3;
 
         // Face Left
         // wrapper.rotation.y = -Math.PI / 2;
@@ -155,7 +242,29 @@ const BullockCartCanvas = () => {
 
         // Enable Shadows
         rawModel.traverse((child) => {
-          if (child.isObject3D) {
+          // if (child.isObject3D) {
+          //   child.castShadow = true;
+          //   child.receiveShadow = true;
+          // }
+          if (child instanceof THREE.Mesh) {
+            const material = child.material;
+
+            // Handle multi-material meshes
+            if (Array.isArray(material)) {
+              material.forEach((mat) => {
+                if (mat instanceof THREE.MeshStandardMaterial) {
+                  mat.metalness = 0.02;
+                  mat.roughness = 0.75;
+                  mat.envMapIntensity = 0.6;
+                }
+              });
+            }
+            if (material instanceof THREE.MeshStandardMaterial) {
+              material.metalness = 0.02;
+              material.roughness = 0.75;
+              material.envMapIntensity = 0.6;
+            }
+
             child.castShadow = true;
             child.receiveShadow = true;
           }
@@ -174,6 +283,16 @@ const BullockCartCanvas = () => {
     // --- ANIMATION LOOP ---
     const clock = new THREE.Clock(); // Needed for smooth animation
     let requestID: number;
+    const speed = 0.4;
+    const maxDistance = 12;
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        cancelAnimationFrame(requestID);
+      } else {
+        animate();
+      }
+    });
 
     const animate = () => {
       requestID = requestAnimationFrame(animate);
@@ -185,15 +304,53 @@ const BullockCartCanvas = () => {
         mixerRef.current.update(delta);
       }
 
+      if (modelRef.current) {
+        modelRef.current.position.z -= delta * speed;
+        travelDistanceRef.current += delta * speed;
+
+        if (travelDistanceRef.current > maxDistance) {
+          // Reset smoothly
+          modelRef.current.position.z = -12;
+          travelDistanceRef.current = 0;
+        }
+      }
+
       // 2. ANIMATE THE GRASS (The "Running" Effect)
       if (groundTextureRef.current) {
         // Move texture on Y axis to simulate forward movement
         // Adjust '0.5' to change speed
-        groundTextureRef.current.offset.y += delta * 0.3;
+        // groundTextureRef.current.offset.y += delta * 0.3;
       }
 
       if (rendererRef.current && sceneRef.current && cameraRef.current) {
         rendererRef.current.render(sceneRef.current, cameraRef.current);
+      }
+
+      if (cameraRef.current) {
+        cameraRef.current.position.z -= delta * 0.3;
+        cameraRef.current.lookAt(0, -1.8, cameraRef.current.position.z - 4);
+        cameraRef.current.position.x = Math.sin(clock.elapsedTime * 0.3) * 0.15;
+      }
+
+      if (rawModelRef.current) {
+        rawModelRef.current.traverse((child) => {
+          if (child instanceof THREE.Mesh && child.name.toLowerCase().includes("wheel")) {
+            child.rotation.x += delta * 1.5;
+          }
+        });
+      }
+
+      if (cameraRef.current && modelRef.current) {
+        const radius = 6; // distance from cart
+        const cartZ = modelRef.current.position.z;
+
+        cameraRef.current.position.x = Math.sin(cameraAngleRef.current) * radius;
+
+        cameraRef.current.position.z = cartZ + Math.cos(cameraAngleRef.current) * radius;
+
+        cameraRef.current.position.y = cameraHeightRef.current;
+
+        cameraRef.current.lookAt(0, -1.8, cartZ - 4);
       }
     };
     animate();
@@ -207,10 +364,12 @@ const BullockCartCanvas = () => {
       isDragging.current = false;
     };
     const dragMove = (x: number, y: number) => {
-      if (!isDragging.current || !modelRef.current) return;
+      if (!isDragging.current || !cameraRef.current) return;
+
       const deltaX = x - lastPosition.current.x;
       lastPosition.current = { x, y };
-      modelRef.current.rotation.y += deltaX * 0.005;
+
+      cameraAngleRef.current -= deltaX * 0.005;
     };
 
     const handleMouseDown = (e: MouseEvent) => startDrag(e.clientX, e.clientY);
@@ -255,7 +414,10 @@ const BullockCartCanvas = () => {
   }, []);
 
   return (
-    <div style={{ width: "100%", height: "100vh", overflow: "hidden", position: "relative" }}>
+    <div
+      className="w-full h-screen overflow-hidden relative 
+                saturate-[0.85] contrast-[1.05]"
+    >
       <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
 
       {/* UI LAYER */}
@@ -270,7 +432,7 @@ const BullockCartCanvas = () => {
               Bridging the gap between traditional wisdom and modern technology.
             </p>
             <div className="pointer-events-auto mt-8">
-              <button className="bg-green-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-green-700 transition-all">
+              <button className="bg-green-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-green-700 transition-all cursor-pointer">
                 Explore Solutions
               </button>
             </div>
