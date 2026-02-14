@@ -1,10 +1,10 @@
 import BullockCartCanvas from "./_components/bullock-cart-canvas";
-import Header from "./_components/header";
+// 1. Delete the Header import line
 
 export default function Home() {
   return (
     <>
-      <Header />
+      {/* 2. Remove the <Header /> tag from here */}
       <BullockCartCanvas />
     </>
   );

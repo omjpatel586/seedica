@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@types/three": "^0.182.0",
+    "autoprefixer": "^10.4.24",
     "next": "16.1.1",
+    "postcss": "^8.5.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "three": "^0.182.0"
@@ -22,7 +24,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.1.18",
     "typescript": "^5"
   }
 }
