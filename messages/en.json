@@ -1,0 +1,232 @@
+{
+  "ProductDetail": {
+    "productNotFound": "Product Not Found",
+    "productNotFoundMessage": "The product you are looking for does not exist.",
+    "productDescription": "Product Description",
+    "certifiedStandard": "( Certified as per FCO Standards )",
+    "organic": "Organic",
+    "genuine": "100% Genuine"
+  },
+  "products": {
+    "1": {
+      "name": "POWER PLUS",
+      "category": "Fertilizer",
+      "desc": "Bio-Enriched Organic Manure. Manufactured using modern technology, Power Plus provides complete nutrition, improves soil health, and ensures abundant yields. It is rich in organic carbon, bio-energy bacteria (Azotobacter, PSB, etc.), and growth boosters like Humic and Amino acids.",
+      "usageTable": {
+        "title": "Usage per Acre",
+        "headers": ["Crop", "Dosage (Approx.)"],
+        "rows": [
+          ["Vegetables / Small Crops", "3 to 4 Bags"],
+          ["Hybrid / Commercial Crops", "5 to 6 Bags"],
+          ["Fruit Trees / Horticulture", "2 to 5 kg (per plant)"]
+        ]
+      },
+      "packaging": "50 Kg ( Powder )"
+    },
+    "2": {
+      "name": "Bio DAP",
+      "category": "Fertilizer",
+      "desc": "Granular Bio-Fertilizer. The best alternative to chemical DAP. It contains Rock Phosphate, organic matter, and Phosphate Solubilizing Bacteria (PSB) to make fixed phosphorus available to crops. Enhances soil fertility and promotes root development.",
+      "usageTable": {
+        "title": "Usage per Acre",
+        "headers": ["Application Rate (Per Acre)", "Dosage (Approx.)"],
+        "rows": [
+          ["Normal Crops", "1 to 2 Bags (50 to 100 kg)"],
+          [
+            "Method of Usage",
+            "As a base fertilizer or as a top-dressing (supplementary) fertilizer."
+          ]
+        ]
+      },
+      "packaging": "50 Kg ( Granular )"
+    },
+    "3": {
+      "name": "BIO N.P.K.",
+      "desc": "Granular Bio-Fertilizer. A complete 'Bio-System' that revitalizes the soil. It fixes Nitrogen from the air, solubilizes soil Phosphorus, and mobilizes Potash. Coated with Humic, Amino, and Seaweed extract for stress protection and root development.",
+      "category": "Fertilizer",
+      "usageTable": {
+        "title": "Usage per Acre",
+        "headers": ["Category", "Dosage (Approx.)"],
+        "rows": [
+          ["Normal Crops", "1 to 2 Bags (50 to 100 kg)"],
+          [
+            "Method of Usage",
+            "As a base fertilizer or as a top-dressing (supplementary) fertilizer."
+          ]
+        ]
+      },
+      "packaging": "50 Kg ( Granular )"
+    },
+    "4": {
+      "name": "CARBONEX",
+      "desc": "Granular Organic Manure. A balanced mix of nutrients essential for both soil and crops. Rich in Organic Carbon, Humic, Natural NPK, Calcium, and Magnesium. It improves soil porosity, moisture retention, and provides steady nutrition for a strong crop.",
+      "category": "Fertilizer",
+      "usageTable": {
+        "title": "Application Rate (Per Acre)",
+        "headers": ["Usage", "Rate"],
+        "rows": [
+          ["Normal Usage", "2 Bags / Acre"],
+          ["Method of Use", "As base fertilizer (at the time of sowing)"]
+        ]
+      },
+      "packaging": "25 kg, Granular"
+    },
+    "5": {
+      "name": "UGAM",
+      "category": "Bio Stimulant",
+      "desc": "(Bio-Stimulant) Soil conditioner and crop growth enhancer. UGAM is not just a fertilizer, but 'nectar' for your soil. It is a powerful mixture of humic, fulvic, and amino acids that revitalizes the plant from root to tip.",
+      "usageTable": {
+        "title": "Application Rate (Per Acre)",
+        "headers": ["Application", "Rate"],
+        "rows": [
+          ["Spray / Pump", "40 to 60 grams (in a 15-liter water pump)"],
+          ["Drip / Irrigation", "500 grams to 1 kg per acre (via soil)"],
+          ["Method of Use", "Via spray pump or soil/drip application"]
+        ]
+      },
+      "packaging": "1 Kg, Powder"
+    },
+    "6": {
+      "name": "Prakruti Kavach",
+      "desc": "The power of 10 natural extracts - complete crop protection and vigorous growth. It also provides nutrition to the plant and naturally gives it the strength to fight against diseases and pests.",
+      "category": "Liquid Fertilizer",
+      "usageTable": {
+        "title": "Usage and Method",
+        "headers": ["Method", "Dosage"],
+        "rows": [
+          ["Pump Dose", "200 to 300 ml in a 15-liter water pump"],
+          ["Spraying Time", "Spray every 10 to 20 days to keep the crop safe"],
+          ["Usage", "Can be started from when the crop is small after sowing seeds"]
+        ]
+      },
+      "packaging": "5 Ltr, Liquid"
+    },
+    "7": {
+      "name": "Neemix",
+      "desc": "Neem Power: Nature's Protector for Crops. The only organic remedy against sucking pests and fungi. It has a tremendous effect on both chewing and sucking types of insects.",
+      "category": "Liquid Fertilizer",
+      "usageTable": {
+        "title": "Usage Instructions",
+        "headers": ["Item", "Details"],
+        "rows": [
+          ["Dose", "30 to 50 ml per 15 Liter pump (Depending on infestation)"],
+          ["Method", "Spray thoroughly on upper and lower sides of leaves."],
+          ["Frequency", "Every 10-15 days as a precaution or when pests are seen."]
+        ]
+      },
+      "packaging": ""
+    },
+    "8": {
+      "name": "RootVeda",
+      "desc": "The True Veda of the Root - Mycorrhizal Biofertilizer. A technology of nature that increases the spread of the plant's roots by 10 times, drawing nutrients from deep within the soil.",
+      "category": "Liquid Fertilizer",
+      "usageTable": {
+        "title": "Usage Method",
+        "headers": ["Method", "Dosage", "Guidance"],
+        "rows": [
+          [
+            "Soil Application",
+            "100 gm / Acre",
+            "Mix with any organic fertilizer (dung manure) or dissolve in water for irrigation."
+          ]
+        ]
+      },
+      "packaging": "100 Grm, Powder"
+    },
+    "9": {
+      "name": "RhizoSpark",
+      "desc": "Rhizobium Nitrogen Fixing Bacteria. A bio-fertilizer that draws nitrogen from the air and gives it to the crop, reducing the need for chemical fertilizers like urea.",
+      "category": "Liquid Fertilizer",
+      "usageTable": {
+        "title": "Usage Method",
+        "headers": ["Method", "Dosage", "Instructions"],
+        "rows": [
+          [
+            "Seed Treatment",
+            "5-10 ml / 1 kg seed",
+            "Mix RhizoSpark with a suitable sticker solution. Dry in shade before sowing."
+          ],
+          [
+            "Soil Application",
+            "1 to 2 Liters / Acre",
+            "Mix with sufficient water or organic fertilizer and apply near the root zone at the time of sowing or during early growth."
+          ],
+          ["Re-use", "-", "A second dose is recommended 30 to 45 days after sowing."]
+        ]
+      },
+      "packaging": "5 Ltr, Liquid"
+    },
+    "10": {
+      "name": "KwikNPK",
+      "desc": "N.P.K Consortia Biofertilizer. A powerful mixture of Nitrogen, Phosphorus, and Potassium fixing bacteria. KwikNPK is not just a fertilizer, but a means of bringing the soil to life. The bacteria of all three main elements (N-P-K) in it dissolve the insoluble nutrients lying in the soil and deliver them directly to the plant's roots.",
+      "category": "Liquid Fertilizer",
+      "usageTable": {
+        "title": "Usage Method",
+        "headers": ["Method", "Dosage", "Instructions"],
+        "rows": [
+          [
+            "Seed Treatment",
+            "500 ml / 50-100 kg seed",
+            "Spray light water on seeds, mix KwikNPK, dry in shade."
+          ],
+          [
+            "Root Application / Irrigation",
+            "1 to 2 Liters / Acre",
+            "Mix in 100-200L water, give via Drip or Irrigation."
+          ],
+          ["Re-use", "-", "Recommended to repeat dose after 30-45 days of sowing."]
+        ]
+      },
+      "packaging": "5 Ltr, Liquid"
+    },
+    "11": {
+      "name": "Spred Plus",
+      "desc": "Increase the power of your medicine - not a single drop will go to waste! It works to increase the effectiveness of the medicine and deliver it across the leaves.",
+      "category": "Liquid Fertilizer",
+      "usageTable": {
+        "title": "How to use",
+        "headers": ["Step", "Instruction"],
+        "rows": [
+          ["Dosage", "Only 5 to 7 ml in a 15-liter pump."],
+          ["1", "First, fill the pump with water."],
+          ["2", "Add the respective insecticide or fungicide."],
+          ["3", "Finally, add Spred Plus and mix well."]
+        ]
+      },
+      "packaging": "100 Ml, Liquid"
+    },
+    "12": {
+      "name": "Samruddhi",
+      "desc": "(Bio-Stimulant) The 'Powerhouse' that enhances the amazing growth of flowers and fruits. A scientifically prepared plant tonic that increases the reproductive power of the crop.",
+      "category": "Bio Stimulant",
+      "usageTable": {
+        "title": "Details",
+        "headers": ["Item", "Dosage (Approx.)"],
+        "rows": [
+          ["Spray / Pump", "30 to 40 grams (in a 15-liter water pump)"],
+          ["Method of Use", "By spraying on the crop (Foliar Spray)."],
+          [
+            "Applicable Crops",
+            "Cotton, Chilli, Tomato, Soybean, Cumin, Pomegranate, and all vegetables, as well as for horticultural crops."
+          ]
+        ]
+      },
+      "packaging": "500 Grm, Powder"
+    },
+    "13": {
+      "name": "VIRAT SUPAR",
+      "desc": "Fast-acting liquid formula for foliage health.",
+      "category": "Liquid Fertilizer"
+    },
+    "14": {
+      "name": "RAXAK",
+      "desc": "Fast-acting liquid formula for foliage health.",
+      "category": "Liquid Fertilizer"
+    },
+    "15": {
+      "name": "PRAKRUTI KAVACH 1LTRE",
+      "desc": "Fast-acting liquid formula for foliage health.",
+      "category": "Liquid Fertilizer"
+    }
+  }
+}
