@@ -32,10 +32,7 @@ export default function ProductDetail() {
   const productDesc = product.description[locale as keyof typeof product.description];
   const productCategory = tProducts(`${product.id}.category`);
   const usageTableTitle = tProducts(`${product.id}.usageTable.title`);
-  const usageTableHeaders = [
-    tProducts(`${product.id}.usageTable.headers.0`),
-    tProducts(`${product.id}.usageTable.headers.1`),
-  ];
+  const usageTableHeaders: string[] = tProducts.raw(`${product.id}.usageTable.headers`);
   const usageTableRows: string[][] = tProducts.raw(`${product.id}.usageTable.rows`);
 
   // Calculate mouse position as a percentage for the zoom origin
@@ -65,19 +62,24 @@ export default function ProductDetail() {
               onMouseLeave={() => setIsHovering(false)}
               onMouseMove={handleMouseMove}
             >
-              <Image
-                src={product.image}
-                alt={productName}
-                fill
-                className={`object-contain transition-transform duration-200 ease-out pointer-events-none ${
-                  isHovering ? "lg:scale-[2.5]" : "scale-100"
-                }`}
-                style={{
-                  // Only apply the origin if we are on a large screen
-                  transformOrigin: isHovering ? `${mousePos.x}% ${mousePos.y}%` : "center",
-                }}
-                priority
-              />
+              {product.image ? (
+                <Image
+                  src={product.image}
+                  alt={productName}
+                  fill
+                  className={`object-contain transition-transform duration-200 ease-out pointer-events-none ${
+                    isHovering ? "lg:scale-[2.5]" : "scale-100"
+                  }`}
+                  style={{
+                    transformOrigin: isHovering ? `${mousePos.x}% ${mousePos.y}%` : "center",
+                  }}
+                  priority
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center text-gray-400">
+                  {productName}
+                </div>
+              )}
 
               {/* Zoom Indicator Icon */}
               {!isHovering && (

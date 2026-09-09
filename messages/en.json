@@ -58,7 +58,7 @@
       "packaging": "50 Kg ( Granular )"
     },
     "4": {
-      "name": "CARBONEX",
+      "name": "Carbon X",
       "desc": "Granular Organic Manure. A balanced mix of nutrients essential for both soil and crops. Rich in Organic Carbon, Humic, Natural NPK, Calcium, and Magnesium. It improves soil porosity, moisture retention, and provides steady nutrition for a strong crop.",
       "category": "Fertilizer",
       "usageTable": {
@@ -102,8 +102,8 @@
       "packaging": "5 Ltr, Liquid"
     },
     "7": {
-      "name": "Neemix",
-      "desc": "Neem Power: Nature's Protector for Crops. The only organic remedy against sucking pests and fungi. It has a tremendous effect on both chewing and sucking types of insects.",
+      "name": "Rakshak",
+      "desc": "Neem Power: Nature's Protector for Crops. The only organic remedy against sucking pests and fungi. It has a tremendous effect on both chewing and sucking types of insects. Rakshak is a high-quality organic insecticide prepared from neem extract.",
       "category": "Liquid Fertilizer",
       "usageTable": {
         "title": "Usage Instructions",
@@ -157,8 +157,8 @@
       "packaging": "5 Ltr, Liquid"
     },
     "10": {
-      "name": "KwikNPK",
-      "desc": "N.P.K Consortia Biofertilizer. A powerful mixture of Nitrogen, Phosphorus, and Potassium fixing bacteria. KwikNPK is not just a fertilizer, but a means of bringing the soil to life. The bacteria of all three main elements (N-P-K) in it dissolve the insoluble nutrients lying in the soil and deliver them directly to the plant's roots.",
+      "name": "Kwik N.P.K.",
+      "desc": "N.P.K Consortia Biofertilizer. A powerful mixture of Nitrogen, Phosphorus, and Potassium fixing bacteria. Kwik N.P.K. is not just a fertilizer, but a means of bringing the soil to life. The bacteria of all three main elements (N-P-K) in it dissolve the insoluble nutrients lying in the soil and deliver them directly to the plant's roots.",
       "category": "Liquid Fertilizer",
       "usageTable": {
         "title": "Usage Method",
@@ -167,7 +167,7 @@
           [
             "Seed Treatment",
             "500 ml / 50-100 kg seed",
-            "Spray light water on seeds, mix KwikNPK, dry in shade."
+            "Spray light water on seeds, mix Kwik N.P.K., dry in shade."
           ],
           [
             "Root Application / Irrigation",
@@ -180,8 +180,8 @@
       "packaging": "5 Ltr, Liquid"
     },
     "11": {
-      "name": "Spred Plus",
-      "desc": "Increase the power of your medicine - not a single drop will go to waste! It works to increase the effectiveness of the medicine and deliver it across the leaves.",
+      "name": "Sarthi",
+      "desc": "Increase the power of your medicine - not a single drop will go to waste! Sarthi works to increase the effectiveness of the medicine and deliver it across the leaves.",
       "category": "Liquid Fertilizer",
       "usageTable": {
         "title": "How to use",
@@ -190,7 +190,7 @@
           ["Dosage", "Only 5 to 7 ml in a 15-liter pump."],
           ["1", "First, fill the pump with water."],
           ["2", "Add the respective insecticide or fungicide."],
-          ["3", "Finally, add Spred Plus and mix well."]
+          ["3", "Finally, add Sarthi and mix well."]
         ]
       },
       "packaging": "100 Ml, Liquid"
@@ -227,6 +227,22 @@
       "name": "PRAKRUTI KAVACH 1LTRE",
       "desc": "Fast-acting liquid formula for foliage health.",
       "category": "Liquid Fertilizer"
+    }
+    ,"16": {
+      "name": "Micro Gold",
+      "desc": "SEEDICA® MICRO GOLD is an advanced 100% water-soluble chelated micronutrient fertilizer formulated with a premium amino acid and botanical base. Ingredients: Zinc, Iron, Manganese, Copper, Boron, Molybdenum, premium amino acids and botanical extracts. It supports rapid nutrient absorption, balanced crop development and overall crop vitality, helping meet micronutrient requirements at critical stages of crop growth.",
+      "category": "Fertilizer",
+      "usageTable": {
+        "title": "Application and Dosage",
+        "headers": ["Application Method", "Dose", "Quantity and Timing"],
+        "rows": [
+          ["Foliar Spray", "25–30 g", "Per 15-liter pump; apply every 10–15 days during vegetative and flowering stages."],
+          ["Drip / Fertigation", "250–500 g", "Per 200 liters of water for one acre; use during active growth, flowering and fruiting stages."],
+          ["Soil Application", "0.5–1 kg", "Mix with soil or organic fertilizer during transplanting, branching, flowering or fruiting stages."],
+          ["General Solution", "1.5–2 g", "Per liter of water; adjust according to crop condition and requirement."]
+        ]
+      },
+      "packaging": "100% Water-Soluble, Powder"
     }
   }
 }
