@@ -91,10 +91,10 @@ Improves soil fertility and moisture retention capacity.`,
     description: {
       [LanguageCode.en]: `(Granular Bio-Fertilizer)
 
-The perfect alternative to DAP, a firm commitment to soil improvement.
-This is a modern organic fertilizer that has emerged as the best alternative to chemical fertilizer (DAP).
+The perfect alternative to D. A. P., a firm commitment to soil improvement.
+This is a modern organic fertilizer that has emerged as the best alternative to chemical fertilizer (D. A. P.).
 
-Key Ingredients of Bio D.A.P:
+Key Ingredients of Bio D. A. P.:
 
 Fine Rock Phosphate: This is the primary source of phosphorus.
 
@@ -102,9 +102,9 @@ Organic Matter: Such as farmyard manure or green manure.
 
 Beneficial Bacteria: Specifically, PSB (Phosphate Solubilizing Bacteria) is added. This dissolves the insoluble phosphorus present in the soil and makes it available to the plants.
 
-Benefits of Bio D.A.P:
+Benefits of Bio D. A. P.:
 
-Excellent Alternative to DAP: It reduces the need for expensive chemical fertilizers like DAP and is much more cost-effective.
+Excellent Alternative to D. A. P.: It reduces the need for expensive chemical fertilizers like D. A. P. and is much more cost-effective.
 
 Increases Soil Fertility: While chemical fertilizers make the soil hard, PROM (Phosphate Rich Organic Manure) makes the soil soft, porous, and fertile.
 
@@ -117,10 +117,10 @@ Increased Yield: It aids in healthy root development, which ultimately enhances 
 Maintains Balance: It helps in maintaining the pH level of the soil, which is particularly beneficial for saline (salty) soils.`,
       [LanguageCode.gu]: `(દાણાદાર બાયો-ફર્ટિલાઇઝર)
 
-ડીએપીનો સંપૂર્ણ વિકલ્પ, જમીન સુધારણા માટે દ્રઢ પ્રતિબદ્ધતા.
-આ એક આધુનિક જૈવિક ખાતર છે જે રાસાયણિક ખાતર (ડીએપી)ના શ્રેષ્ઠ વિકલ્પ તરીકે ઉભરી આવ્યું છે.
+ડી. એ. પી.નો સંપૂર્ણ વિકલ્પ, જમીન સુધારણા માટે દ્રઢ પ્રતિબદ્ધતા.
+આ એક આધુનિક જૈવિક ખાતર છે જે રાસાયણિક ખાતર (ડી. એ. પી.)ના શ્રેષ્ઠ વિકલ્પ તરીકે ઉભરી આવ્યું છે.
 
-બાયો ડી.એ.પી.ના મુખ્ય ઘટકો:
+બાયો ડી. એ. પી.ના મુખ્ય ઘટકો:
 
 ફાઇન રોક ફોસ્ફેટ: આ ફોસ્ફરસનો પ્રાથમિક સ્ત્રોત છે.
 
@@ -128,9 +128,9 @@ Maintains Balance: It helps in maintaining the pH level of the soil, which is pa
 
 ફાયદાકારક બેક્ટેરિયા: ખાસ કરીને, પીએસબી (ફોસ્ફેટ સોલ્યુબિલાઇઝિંગ બેક્ટેરિયા) ઉમેરવામાં આવે છે. આ જમીનમાં રહેલા અદ્રાવ્ય ફોસ્ફરસને ઓગાળીને છોડને ઉપલબ્ધ કરાવે છે.
 
-બાયો ડી.એ.પી.ના ફાયદા:
+બાયો ડી. એ. પી.ના ફાયદા:
 
-ડીએપીનો ઉત્તમ વિકલ્પ: તે ડીએપી જેવા મોંઘા રાસાયણિક ખાતરોની જરૂરિયાત ઘટાડે છે અને તે વધુ ખર્ચ-અસરકારક છે.
+ડી. એ. પી.નો ઉત્તમ વિકલ્પ: તે ડી. એ. પી. જેવા મોંઘા રાસાયણિક ખાતરોની જરૂરિયાત ઘટાડે છે અને તે વધુ ખર્ચ-અસરકારક છે.
 
 જમીનની ફળદ્રુપતા વધારે છે: જ્યારે રાસાયણિક ખાતરો જમીનને સખત બનાવે છે, ત્યારે પ્રોમ (ફોસ્ફેટ રિચ ઓર્ગેનિક મેન્યુઅર) જમીનને નરમ, છિદ્રાળુ અને ફળદ્રુપ બનાવે છે.
 
@@ -143,10 +143,10 @@ Maintains Balance: It helps in maintaining the pH level of the soil, which is pa
 સંતુલન જાળવે છે: તે જમીનના પીએચ સ્તરને જાળવવામાં મદદ કરે છે, જે ખાસ કરીને ખારી (ખારી) જમીન માટે ફાયદાકારક છે.`,
       [LanguageCode.hi]: `(दानेदार जैव-उर्वरक)
 
-डीएपी का सही विकल्प, मिट्टी के सुधार के लिए एक दृढ़ प्रतिबद्धता।
-यह एक आधुनिक जैविक उर्वरक है जो रासायनिक उर्वरक (डीएपी) के सर्वोत्तम विकल्प के रूप में उभरा है।
+डी. ए. पी. का सही विकल्प, मिट्टी के सुधार के लिए एक दृढ़ प्रतिबद्धता।
+यह एक आधुनिक जैविक उर्वरक है जो रासायनिक उर्वरक (डी. ए. पी.) के सर्वोत्तम विकल्प के रूप में उभरा है।
 
-बायो डी.ए.पी. के प्रमुख तत्व:
+बायो डी. ए. पी. के प्रमुख तत्व:
 
 फाइन रॉक फॉस्फेट: यह फास्फोरस का प्राथमिक स्रोत है।
 
@@ -154,9 +154,9 @@ Maintains Balance: It helps in maintaining the pH level of the soil, which is pa
 
 लाभकारी बैक्टीरिया: विशेष रूप से, पीएसबी (फॉस्फेट घुलनशील बैक्टीरिया) मिलाया जाता है। यह मिट्टी में मौजूद अघुलनशील फास्फोरस को घोलकर पौधों को उपलब्ध कराता है।
 
-बायो डी.ए.पी. के लाभ:
+बायो डी. ए. पी. के लाभ:
 
-डीएपी का उत्कृष्ट विकल्प: यह डीएपी जैसे महंगे रासायनिक उर्वरकों की आवश्यकता को कम करता है और यह बहुत अधिक लागत प्रभावी है।
+डी. ए. पी. का उत्कृष्ट विकल्प: यह डी. ए. पी. जैसे महंगे रासायनिक उर्वरकों की आवश्यकता को कम करता है और यह बहुत अधिक लागत प्रभावी है।
 
 मिट्टी की उर्वरता बढ़ाता है: जबकि रासायनिक उर्वरक मिट्टी को कठोर बनाते हैं, प्रोम (फॉस्फेट युक्त जैविक खाद) मिट्टी को नरम, झरझरा और उपजाऊ बनाता है।
 
@@ -288,7 +288,7 @@ K (પોટાશ): પાકને મજબૂત અને સ્વસ્�
   },
   {
     id: "6",
-    price: "₹1650",
+    price: "₹2100",
     image: "/images/12-Prakruti kavach .png",
     description: {
       [LanguageCode.en]: `The power of 10 natural extracts - complete crop protection and vigorous growth. Friends of farmers, now your crops will get the protection cycle of nature! Prakruti Kavach is your first step towards poison-free farming. It also provides nutrition to the plant and naturally gives it the strength to fight against diseases and pests.`,
@@ -299,7 +299,7 @@ K (પોટાશ): પાકને મજબૂત અને સ્વસ્�
   {
     id: "7",
     price: "₹650",
-    image: "/images/10-NEEMIX.jpeg",
+    image: "/images/Rakshak.png",
     description: {
       [LanguageCode.en]: `Neem Power: Nature's Protector for Crops. The only organic remedy against sucking pests and fungi. This product is a high-quality organic insecticide prepared from neem extract, which protects the crop from harmful pests and deadly fungi, keeping the crop healthy. Which pests does Rakshak fight against? It has a tremendous effect on both chewing and sucking types of insects: Pests: Mealybug, Armyworm, Aphids, Thrips, and Whitefly. Fungi Control: Prevents black spot, anthracnose, and other common fungi. Key Benefits: Multipurpose Protection: It works as both an insecticide and a fungicide at the same time. Protection against stress: It gives the plant the strength to survive against excessive heat or water scarcity (biotic and abiotic stress). More production: The destruction of pests improves the quality of the crop and increases production. Environmental protection: Being 100% organic, it is not harmful to the soil, animals, birds, or humans.`,
       [LanguageCode.gu]: `લીમડાની શક્તિ: પાકનો કુદરતી રક્ષક. ચૂસિયા પ્રકારની જીવાતો અને ફૂગ સામે એકમાત્ર જૈવિક ઈલાજ. આ પ્રોડક્ટ લીમડાના અર્કમાંથી તૈયાર કરેલું એક ઉચ્ચ ગુણવત્તાનું જૈવિક જંતુનાશક છે, જે પાકને નુકસાન પહોંચાડતી જીવાતો અને જીવલેણ ફૂગ સામે રક્ષણ આપી પાકને તંદુરસ્ત રાખે છે. રક્ષક કઈ જીવાતો સામે લડે છે? તે ચાવતા અને ચૂસતા એમ બંને પ્રકારના જંતુઓ પર જબરદસ્ત અસર કરે છે: જીવાતો: મિલીબગ (સફેદ મસી), આર્મી વોર્મ (લશ્કરી ઈયળ), એફિડ્સ (મસી), થ્રિપ્સ અને સફેદ માખી. ફૂગ નિયંત્રણ: કાળા ડાઘ, એન્થ્રેકનોઝ અને અન્ય સામાન્ય ફૂગને અટકાવે છે. મુખ્ય ફાયદાઓ: બહુમુખી રક્ષણ: તે એકસાથે જંતુનાશક અને ફૂગનાશક એમ બંનેનું કામ કરે છે. તણાવ સામે રક્ષણ: અતિશય ગરમી કે પાણીની અછત (જૈવિક અને અજૈવિક તાણ) સામે છોડને ટકી રહેવાની શક્તિ આપે છે. વધુ ઉત્પાદન: જીવાતોનો નાશ થવાથી પાકની ગુણવત્તા સુધરે છે અને ઉત્પાદનમાં વધારો થાય છે. પર્યાવરણ સુરક્ષા: તે ૧૦૦% જૈવિક હોવાથી જમીન, પશુ-પક્ષી કે મનુષ્ય માટે હાનિકારક નથી.`,
@@ -339,7 +339,7 @@ K (પોટાશ): પાકને મજબૂત અને સ્વસ્�
   {
     id: "11",
     price: "₹1650",
-    image: "/images/11-SPRD PLUS.jpeg",
+    image: "/images/Sarthi.png",
     description: {
       [LanguageCode.en]: `Increase the power of your medicine - not a single drop will go to waste! Do you know? Often after spraying, the medicine falls off the leaves or evaporates in the sun. Sarthi works to increase the effectiveness of the medicine and deliver it across the leaves. Benefits of Sarthi: Super Spreader: As soon as this medicine falls on the leaf, it breaks the drop and spreads it evenly over the entire leaf, so that every corner of the leaf is protected. Sticking power: It makes the medicine stick firmly to the leaf, so that the medicine does not wash away even in light rain or dew. Quick absorption (Penetrator): It helps to carry the medicine down to the veins of the leaf, so that wherever the caterpillar or sucking pest is hidden, the effect of the medicine reaches it. Saving of medicine: Using Sarthi prevents wastage of medicine, which gives long-lasting results in fewer rounds and saves money.`,
       [LanguageCode.gu]: `તમારી દવાની શક્તિ વધારો – એક પણ ટીપું નકામું નહીં જાય! શું તમે જાણો છો? ઘણીવાર સ્પ્રે કર્યા પછી દવા પાંદડા પરથી નીચે ખરી જાય છે અથવા તડકામાં ઉડી જાય છે. સારથી દવાની અસરકારકતા વધારીને તેને પાંદડાની આરપાર પહોંચાડવાનું કામ કરે છે. સારથીના ફાયદા: સુપર સ્પ્રેડર (ઝડપી ફેલાવો): આ દવા પાંદડા પર પડતા જ ટીપાને તોડીને આખા પાન પર એકસરખું ફેલાવી દે છે, જેથી પાનનો ખૂણેખૂણો સુરક્ષિત થાય છે. ચોંટાડવાની શક્તિ (Sticker): તે દવાને પાંદડા પર મજબૂતીથી ચોંટાડી દે છે, જેથી હળવા વરસાદ કે ઝાકળમાં પણ દવા ધોવાઈ જતી નથી. ઝડપી શોષણ (Penetrator): દવાને પાંદડાની નસો સુધી ઉતારવામાં મદદ કરે છે, જેથી ઈયળ કે ચૂસિયા જીવાત ગમે ત્યાં છુપાયેલી હોય, દવાની અસર તેના સુધી પહોંચે છે. દવાની બચત: સારથી વાપરવાથી દવાનો બગાડ અટકે છે, જેનાથી ઓછા રાઉન્ડમાં લાંબા સમય સુધી રિઝલ્ટ મળે છે અને પૈસાની બચત થાય છે.`,
@@ -348,7 +348,7 @@ K (પોટાશ): પાકને મજબૂત અને સ્વસ્�
   },
   {
     id: "12",
-    price: "950",
+    price: "₹950",
     image: "/images/Samruddhi.png",
     description: {
       [LanguageCode.en]: `(Bio-Stimulant) The "Powerhouse" that enhances the amazing growth of flowers and fruits. Samruddhi is a scientifically prepared plant tonic that increases the reproductive power of the crop. It is a combination of seaweed, protein, and vitamins that has the ability to turn every flower into a fruit. Main components of Samruddhi: Seaweed Extract: For the internal growth and nutrition of the plant. Protein and Amino Acid: Strengthens the structure of flowers and fruits. Humic and Fulvic Acid: Increases the power to draw nutrients from the soil and air. Enzymes and Vitamins: Keeps the crop stress-free and increases immunity. Key Benefits: Increase in flowers: Accelerates the process of flowering and brings maximum flowers. Prevents falling: Prevents premature falling of flowers and small fruits (chapava/jindava/fruit). Fruit quality: Increases the size, shine, weight, and taste of the fruit. Natural protection: Gives the plant the strength to fight against changes in the atmosphere (more heat or cold) and diseases. Freshness: Keeps the crop green and fresh for a long time.`,
@@ -357,26 +357,14 @@ K (પોટાશ): પાકને મજબૂત અને સ્વસ્�
     }
   },
   {
-    id: "13",
-    price: "₹1650",
-    image: "/images/VIRAT SUPAR.jpeg",
-    description: { [LanguageCode.en]: '', [LanguageCode.gu]: '', [LanguageCode.hi]: '' }
-  },
-  {
-    id: "14",
-    price: "₹1650",
-    image: "/images/RAXAK.jpeg",
-    description: { [LanguageCode.en]: '', [LanguageCode.gu]: '', [LanguageCode.hi]: '' }
-  },
-  {
     id: "15",
-    price: "₹1650",
+    price: "₹550",
     image: "/images/PRAKRUTI KAVACH 1LTRE.jpg",
     description: { [LanguageCode.en]: '', [LanguageCode.gu]: '', [LanguageCode.hi]: '' }
   },
   {
     id: "16",
-    price: "—",
+    price: "₹1050",
     image: "/images/micro-gold.png",
     description: {
       [LanguageCode.en]: `SEEDICA® MICRO GOLD is an advanced 100% water-soluble chelated micronutrient fertilizer formulated with a premium amino acid and botanical base. It is designed to provide essential micronutrients to plants in an easily available form, supporting rapid nutrient absorption, balanced crop development and overall crop vitality.\n\nThe carefully balanced combination of Zinc, Iron, Manganese, Copper, Boron and Molybdenum helps address micronutrient requirements at critical stages of crop growth. Its amino acid and botanical base further supports healthy plant development, making MICRO GOLD a comprehensive micronutrient solution for a wide range of agricultural and commercial crops.\n\nIngredients:\nZinc, Iron, Manganese, Copper, Boron, Molybdenum, premium amino acids and botanical extracts.`,

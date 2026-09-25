@@ -24,9 +24,9 @@
       "packaging": "50 Kg ( Powder )"
     },
     "2": {
-      "name": "Bio DAP",
+      "name": "Bio D. A. P.",
       "category": "Fertilizer",
-      "desc": "Granular Bio-Fertilizer. The best alternative to chemical DAP. It contains Rock Phosphate, organic matter, and Phosphate Solubilizing Bacteria (PSB) to make fixed phosphorus available to crops. Enhances soil fertility and promotes root development.",
+      "desc": "Granular Bio-Fertilizer. The best alternative to chemical D. A. P. It contains Rock Phosphate, organic matter, and Phosphate Solubilizing Bacteria (PSB) to make fixed phosphorus available to crops. Enhances soil fertility and promotes root development.",
       "usageTable": {
         "title": "Usage per Acre",
         "headers": ["Application Rate (Per Acre)", "Dosage (Approx.)"],
@@ -212,16 +212,6 @@
         ]
       },
       "packaging": "500 Grm, Powder"
-    },
-    "13": {
-      "name": "VIRAT SUPAR",
-      "desc": "Fast-acting liquid formula for foliage health.",
-      "category": "Liquid Fertilizer"
-    },
-    "14": {
-      "name": "RAXAK",
-      "desc": "Fast-acting liquid formula for foliage health.",
-      "category": "Liquid Fertilizer"
     },
     "15": {
       "name": "PRAKRUTI KAVACH 1LTRE",
