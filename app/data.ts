@@ -288,7 +288,7 @@ K (પોટાશ): પાકને મજબૂત અને સ્વસ્�
   },
   {
     id: "6",
-    price: "₹2100",
+    price: "₹4950",
     image: "/images/12-Prakruti kavach .png",
     description: {
       [LanguageCode.en]: `The power of 10 natural extracts - complete crop protection and vigorous growth. Friends of farmers, now your crops will get the protection cycle of nature! Prakruti Kavach is your first step towards poison-free farming. It also provides nutrition to the plant and naturally gives it the strength to fight against diseases and pests.`,
@@ -338,7 +338,7 @@ K (પોટાશ): પાકને મજબૂત અને સ્વસ્�
   },
   {
     id: "11",
-    price: "₹1650",
+    price: "₹240",
     image: "/images/Sarthi.png",
     description: {
       [LanguageCode.en]: `Increase the power of your medicine - not a single drop will go to waste! Do you know? Often after spraying, the medicine falls off the leaves or evaporates in the sun. Sarthi works to increase the effectiveness of the medicine and deliver it across the leaves. Benefits of Sarthi: Super Spreader: As soon as this medicine falls on the leaf, it breaks the drop and spreads it evenly over the entire leaf, so that every corner of the leaf is protected. Sticking power: It makes the medicine stick firmly to the leaf, so that the medicine does not wash away even in light rain or dew. Quick absorption (Penetrator): It helps to carry the medicine down to the veins of the leaf, so that wherever the caterpillar or sucking pest is hidden, the effect of the medicine reaches it. Saving of medicine: Using Sarthi prevents wastage of medicine, which gives long-lasting results in fewer rounds and saves money.`,
@@ -358,7 +358,7 @@ K (પોટાશ): પાકને મજબૂત અને સ્વસ્�
   },
   {
     id: "15",
-    price: "₹550",
+    price: "₹1350",
     image: "/images/PRAKRUTI KAVACH 1LTRE.jpg",
     description: { [LanguageCode.en]: '', [LanguageCode.gu]: '', [LanguageCode.hi]: '' }
   },
