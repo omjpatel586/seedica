@@ -6,10 +6,12 @@ name: Deploy
 #   SSH_PRIVATE_KEY : full contents of the .pem file, including the
 #                     "-----BEGIN ... KEY-----" / "-----END ... KEY-----" lines
 #   SERVER_IP       : server IP or hostname
-#   SSH_USER        : SSH login user (e.g. ubuntu / ec2-user / root)
+#   SSH_USER        : SSH login user (on a Hostinger VPS this is usually "root")
 #
 # Required GitHub *Variables* (same page -> Variables tab)
-#   APP_DIR         : absolute path to the repo on the server, e.g. /var/www/seedica
+#   APP_DIR         : ABSOLUTE path to the repo on the server.
+#                     Note "~/seedica/seedica" or "seedica/seedica" will NOT work;
+#                     for the root user it is normally /root/seedica/seedica
 #   PM2_APP_NAME    : pm2 process name, as shown by `pm2 list`, e.g. seedica
 #
 # Optional Variables
@@ -52,6 +54,23 @@ jobs:
             echo "::error::Missing required configuration: ${missing[*]}"
             exit 1
           fi
+          # A tilde, a relative path or a stray space in a GitHub Variable all
+          # surface later as a confusing "cd: No such file or directory",
+          # so reject them here where the message can name the cause.
+          case "$APP_DIR" in
+            "~"*)
+              echo "::error::vars.APP_DIR must not start with '~' (it is not expanded). Use the full path, e.g. /root/seedica/seedica"
+              exit 1 ;;
+            /*) ;;
+            *)
+              echo "::error::vars.APP_DIR must be an absolute path starting with '/', got '$APP_DIR'"
+              exit 1 ;;
+          esac
+          case "$APP_DIR" in
+            *[[:space:]]*)
+              echo "::error::vars.APP_DIR contains whitespace: '$APP_DIR'"
+              exit 1 ;;
+          esac
           echo "All required configuration is present."
 
       - name: Configure SSH key and known_hosts
@@ -62,10 +81,14 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          # The .pem contents come from a secret; a trailing newline is required
-          # or OpenSSH rejects the key as malformed.
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy.pem
+          # Strip CR so a pem pasted from Windows is still a valid key, and
+          # guarantee the trailing newline OpenSSH requires.
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy.pem
           chmod 600 ~/.ssh/deploy.pem
+          if ! ssh-keygen -y -f ~/.ssh/deploy.pem > /dev/null 2>&1; then
+            echo "::error::secrets.SSH_PRIVATE_KEY is not a valid private key. Paste the whole .pem including the BEGIN/END lines."
+            exit 1
+          fi
           # Pin the host key rather than disabling StrictHostKeyChecking.
           ssh-keyscan -p "$SSH_PORT" -H "$SERVER_IP" >> ~/.ssh/known_hosts 2>/dev/null
           chmod 600 ~/.ssh/known_hosts
@@ -88,36 +111,118 @@ jobs:
               -o ServerAliveInterval=30 \
               "$SSH_USER@$SERVER_IP" \
               bash -s -- "$APP_DIR" "$PM2_APP_NAME" "$DEPLOY_BRANCH" "$NODE_ENV" <<'REMOTE'
-          set -euo pipefail
+          # Not using `set -u`: nvm.sh trips over unset variables when sourced.
+          set -eo pipefail
 
           APP_DIR="$1"
           PM2_APP_NAME="$2"
           DEPLOY_BRANCH="$3"
           export NODE_ENV="$4"
 
-          # pm2/node usually live in a version-manager path that a non-login
-          # shell does not pick up; load nvm if it is installed.
-          export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
-          if [ -s "$HOME/.nvm/nvm.sh" ]; then
-            # shellcheck disable=SC1091
-            . "$HOME/.nvm/nvm.sh"
+          echo "==> Environment"
+          echo "    whoami  : $(whoami)"
+          echo "    HOME    : $HOME"
+          echo "    APP_DIR : $APP_DIR"
+
+          # ---------------------------------------------------------------
+          # Locate the checkout BEFORE anything else, and if it is missing,
+          # print enough to identify the real path in a single run.
+          # ---------------------------------------------------------------
+          if [ ! -d "$APP_DIR" ]; then
+            echo
+            echo "ERROR: APP_DIR '$APP_DIR' does not exist on this server."
+            echo
+            echo "--- contents of / ---"
+            ls -1 / 2>/dev/null
+            echo
+            echo "--- contents of \$HOME ($HOME) ---"
+            ls -la "$HOME" 2>/dev/null
+            parent="$(dirname "$APP_DIR")"
+            if [ -d "$parent" ]; then
+              echo
+              echo "--- contents of $parent ---"
+              ls -la "$parent"
+            else
+              echo
+              echo "(parent directory '$parent' does not exist either)"
+            fi
+            echo
+            echo "--- git checkouts found on this server ---"
+            find /root /home /var/www /srv /opt /seedica -maxdepth 4 -type d -name .git \
+              2>/dev/null | sed 's|/\.git$||' | head -20
+            echo
+            echo "Set the GitHub Variable APP_DIR to one of the paths listed above."
+            exit 1
           fi
 
-          echo "==> Node $(node -v), npm $(npm -v)"
-
           cd "$APP_DIR"
+
+          if [ ! -d .git ]; then
+            echo "ERROR: '$APP_DIR' exists but is not a git repository (no .git directory)."
+            echo "Contents:"
+            ls -la
+            exit 1
+          fi
+
+          # ---------------------------------------------------------------
+          # Toolchain discovery.
+          #
+          # `ssh host bash -s` gets a NON-interactive, NON-login shell, so
+          # /etc/profile, ~/.bashrc and ~/.profile are all skipped and nvm is
+          # never initialised. Because npm/npx/pm2 are node scripts starting
+          # with `#!/usr/bin/env node`, a missing node makes them fail with
+          # "/usr/bin/env: 'node': No such file or directory" -- which reads
+          # like a missing path rather than a missing runtime. Resolve it here.
+          # ---------------------------------------------------------------
+          export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+          if [ -s "$NVM_DIR/nvm.sh" ]; then
+            . "$NVM_DIR/nvm.sh" > /dev/null 2>&1 || true
+            # `nvm` is a shell function and only exists after sourcing.
+            command -v nvm > /dev/null 2>&1 && nvm use --silent default > /dev/null 2>&1 || true
+          fi
+
+          # Prepend plausible locations, including nvm's versioned bin dirs and
+          # the usual nodesource / Hostinger paths.
+          for d in /usr/bin /usr/local/bin /opt/nodejs/bin "$NVM_DIR"/versions/node/*/bin; do
+            [ -d "$d" ] && PATH="$d:$PATH"
+          done
+          export PATH
+
+          echo "==> Toolchain"
+          toolchain_ok=1
+          for bin in git node npm pm2; do
+            if command -v "$bin" > /dev/null 2>&1; then
+              printf '    %-5s : %s (%s)\n' "$bin" "$(command -v "$bin")" "$("$bin" --version 2>&1 | head -1)"
+            else
+              echo "    $bin : NOT FOUND"
+              toolchain_ok=0
+            fi
+          done
+          if [ "$toolchain_ok" -ne 1 ]; then
+            echo
+            echo "ERROR: commands above are missing from this non-interactive SSH session."
+            echo "Searched PATH: $PATH"
+            echo "Run 'command -v node npm pm2' on the server over a normal login to"
+            echo "find their real paths, then add that directory to the PATH loop in"
+            echo ".github/workflows/deploy.yml."
+            exit 1
+          fi
 
           echo "==> Pulling $DEPLOY_BRANCH"
           git fetch origin "$DEPLOY_BRANCH"
           # Force the working tree to match the remote. Any uncommitted edits
           # made directly on the server are DISCARDED.
           git reset --hard "origin/$DEPLOY_BRANCH"
-          echo "==> Now at $(git rev-parse --short HEAD): $(git log -1 --pretty=%s)"
+          echo "    now at $(git rev-parse --short HEAD): $(git log -1 --pretty=%s)"
 
           echo "==> Installing dependencies"
-          # npm ci needs the dev deps to build (next, typescript, tailwind),
-          # so install everything regardless of NODE_ENV.
-          npm ci --include=dev
+          # The build needs devDependencies (next, typescript, tailwind), which
+          # npm would skip under NODE_ENV=production, so ask for them.
+          if [ -f package-lock.json ]; then
+            npm ci --include=dev
+          else
+            npm install --include=dev
+          fi
 
           echo "==> Building Next.js app"
           npm run build
@@ -131,10 +236,10 @@ jobs:
           fi
 
           # Persist the process list so the app survives a server reboot.
-          pm2 save
+          pm2 save > /dev/null
 
           echo "==> Deploy complete"
-          pm2 describe "$PM2_APP_NAME" | grep -E 'status|uptime|restarts' || true
+          pm2 list
           REMOTE
 
       - name: Remove SSH key from runner
