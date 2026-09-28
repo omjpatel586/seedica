@@ -1,0 +1,142 @@
+name: Deploy
+
+# Deploys to the app server over SSH: pull -> install -> next build -> pm2 restart.
+#
+# Required GitHub *Secrets*  (Settings -> Secrets and variables -> Actions -> Secrets)
+#   SSH_PRIVATE_KEY : full contents of the .pem file, including the
+#                     "-----BEGIN ... KEY-----" / "-----END ... KEY-----" lines
+#   SERVER_IP       : server IP or hostname
+#   SSH_USER        : SSH login user (e.g. ubuntu / ec2-user / root)
+#
+# Required GitHub *Variables* (same page -> Variables tab)
+#   APP_DIR         : absolute path to the repo on the server, e.g. /var/www/seedica
+#   PM2_APP_NAME    : pm2 process name, as shown by `pm2 list`, e.g. seedica
+#
+# Optional Variables
+#   SSH_PORT        : defaults to 22
+#   NODE_ENV        : defaults to production
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# Never let two deploys touch the server at once; queue instead of cancelling
+# so an in-flight build is not killed halfway through.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and restart on server
+    runs-on: ubuntu-latest
+    # The build runs on the server, so the runner only needs an SSH client.
+
+    steps:
+      - name: Verify required secrets and variables are set
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          APP_DIR: ${{ vars.APP_DIR }}
+          PM2_APP_NAME: ${{ vars.PM2_APP_NAME }}
+        run: |
+          missing=()
+          [ -n "$SSH_PRIVATE_KEY" ] || missing+=("secrets.SSH_PRIVATE_KEY")
+          [ -n "$SERVER_IP" ]       || missing+=("secrets.SERVER_IP")
+          [ -n "$SSH_USER" ]        || missing+=("secrets.SSH_USER")
+          [ -n "$APP_DIR" ]         || missing+=("vars.APP_DIR")
+          [ -n "$PM2_APP_NAME" ]    || missing+=("vars.PM2_APP_NAME")
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::Missing required configuration: ${missing[*]}"
+            exit 1
+          fi
+          echo "All required configuration is present."
+
+      - name: Configure SSH key and known_hosts
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SSH_PORT: ${{ vars.SSH_PORT || '22' }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          # The .pem contents come from a secret; a trailing newline is required
+          # or OpenSSH rejects the key as malformed.
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy.pem
+          chmod 600 ~/.ssh/deploy.pem
+          # Pin the host key rather than disabling StrictHostKeyChecking.
+          ssh-keyscan -p "$SSH_PORT" -H "$SERVER_IP" >> ~/.ssh/known_hosts 2>/dev/null
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Deploy
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ vars.SSH_PORT || '22' }}
+          APP_DIR: ${{ vars.APP_DIR }}
+          PM2_APP_NAME: ${{ vars.PM2_APP_NAME }}
+          DEPLOY_BRANCH: ${{ github.ref_name }}
+          NODE_ENV: ${{ vars.NODE_ENV || 'production' }}
+        run: |
+          # The heredoc is quoted so $VARS inside are expanded on the SERVER,
+          # not by the runner. Config is passed positionally instead.
+          ssh -i ~/.ssh/deploy.pem \
+              -p "$SSH_PORT" \
+              -o BatchMode=yes \
+              -o ServerAliveInterval=30 \
+              "$SSH_USER@$SERVER_IP" \
+              bash -s -- "$APP_DIR" "$PM2_APP_NAME" "$DEPLOY_BRANCH" "$NODE_ENV" <<'REMOTE'
+          set -euo pipefail
+
+          APP_DIR="$1"
+          PM2_APP_NAME="$2"
+          DEPLOY_BRANCH="$3"
+          export NODE_ENV="$4"
+
+          # pm2/node usually live in a version-manager path that a non-login
+          # shell does not pick up; load nvm if it is installed.
+          export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
+          if [ -s "$HOME/.nvm/nvm.sh" ]; then
+            # shellcheck disable=SC1091
+            . "$HOME/.nvm/nvm.sh"
+          fi
+
+          echo "==> Node $(node -v), npm $(npm -v)"
+
+          cd "$APP_DIR"
+
+          echo "==> Pulling $DEPLOY_BRANCH"
+          git fetch origin "$DEPLOY_BRANCH"
+          # Force the working tree to match the remote. Any uncommitted edits
+          # made directly on the server are DISCARDED.
+          git reset --hard "origin/$DEPLOY_BRANCH"
+          echo "==> Now at $(git rev-parse --short HEAD): $(git log -1 --pretty=%s)"
+
+          echo "==> Installing dependencies"
+          # npm ci needs the dev deps to build (next, typescript, tailwind),
+          # so install everything regardless of NODE_ENV.
+          npm ci --include=dev
+
+          echo "==> Building Next.js app"
+          npm run build
+
+          echo "==> Restarting pm2 process '$PM2_APP_NAME'"
+          if pm2 describe "$PM2_APP_NAME" > /dev/null 2>&1; then
+            pm2 restart "$PM2_APP_NAME" --update-env
+          else
+            echo "    process not found; starting it for the first time"
+            pm2 start npm --name "$PM2_APP_NAME" -- start
+          fi
+
+          # Persist the process list so the app survives a server reboot.
+          pm2 save
+
+          echo "==> Deploy complete"
+          pm2 describe "$PM2_APP_NAME" | grep -E 'status|uptime|restarts' || true
+          REMOTE
+
+      - name: Remove SSH key from runner
+        if: always()
+        run: rm -f ~/.ssh/deploy.pem
